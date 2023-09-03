@@ -1,11 +1,5 @@
 .intel_syntax noprefix
 
-# on the main stack frame 
-# (esp) -> number of arguments
-# 4(esp) -> address of the name of the executable
-# 8(esp) -> address of the first command line argument (if exists)
-# 12(esp) -> address of the secend command line argument (if exists)
-
 .section .data
 
 wrong_args_message:
