@@ -1,5 +1,11 @@
 .intel_syntax noprefix
 
+# on the main stack frame 
+# (esp) -> number of arguments
+# 4(esp) -> address of the name of the executable
+# 8(esp) -> address of the first command line argument (if exists)
+# 12(esp) -> address of the secend command line argument (if exists)
+
 .section .data
 
 wrong_args_message:
@@ -60,7 +66,7 @@ double_digit:
 	sub ch, ZERO_ASCII # sub from units 
 	sub cl, ZERO_ASCII # sub from tens 
 	# we now have the first digit in cl and the second in ch
-	# we now preapre to multiply
+	# we now prepare to multiply
 	xor eax, eax 
 	cdq
 	mov al, 10
