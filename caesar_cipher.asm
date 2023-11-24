@@ -15,7 +15,7 @@ wrong_args_length:
 .long 21
 
 wrong_index_size:
-.ascii "Your upper Index is either too big or too small. Please choose one between 0 to 26\n"
+.ascii "Your shift index is either too big or too small. Please choose one between 0 to 26\n"
 
 wrong_index_size_length:
 .long 83
@@ -43,7 +43,7 @@ setup_loop:
 	xor edx, edx
 
 read_loop:
-	# find length of the upper index
+	# find length of the shift index
 	inc edx
 	cmp BYTE ptr [ebx+edx], 0
 	jne read_loop
@@ -85,7 +85,7 @@ input_sanity_check:
 	mov eax, [esp+8]
 
 convert_sentence:
-	# Actual converting the sentence
+	# Actual convertion of the sentence
 	cmp BYTE ptr [eax+edx], 0
 	je done_convert
 
@@ -106,14 +106,14 @@ check_uppercase:
 
 convert_uppercase:
 	add BYTE ptr [eax+edx], bl
-	# deal with ascii values greater than the in the letters range - uppercase
+	# deal with ascii values greater than the one in the letters range - uppercase
 	cmp BYTE ptr [eax+edx], 'Z'
 	jg reset_offset
 	jmp inc_index
 
 convert_lowercase:
 	add BYTE ptr [eax+edx], bl
-	# deal with ascii values greater than the in the letters range - lower calse
+	# deal with ascii values greater than the one in the letters range - lowercase
 	cmp BYTE ptr [eax+edx], 'z'
 	ja reset_offset # use unsigned contional jump
 	jmp inc_index
